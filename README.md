@@ -5,19 +5,19 @@ Your json should be like this:
 ```json
 [
     {
-      'ssid': 'ssid1',
-      'password': 'password123',
-      'security': 'WPA2'
+      "ssid": "ssid1",
+      "password": "password123",
+      "security": "WPA2"
     },
     {
-      'ssid': 'ssid2',
-      'password': 'password123',
-      'security': 'WPA'
+      "ssid": "ssid2",
+      "password": "password123",
+      "security": "WPA"
     },
     {
-      'ssid': 'ssid3',
-      'password': 'password123',
-      'security': 'WPE'
+      "ssid": "ssid3",
+      "password": "password123",
+      "security": "WPE"
     }
 ]
 ```
