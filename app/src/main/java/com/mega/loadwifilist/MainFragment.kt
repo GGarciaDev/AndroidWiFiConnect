@@ -1,8 +1,8 @@
 package com.mega.loadwifilist
 
 import android.content.Context
+import android.content.Intent
 import android.net.Uri
-import android.net.wifi.WifiConfiguration
 import android.net.wifi.WifiManager
 import android.os.Bundle
 import android.util.Log
@@ -16,6 +16,7 @@ import com.beust.klaxon.JsonReader
 import com.beust.klaxon.Klaxon
 import java.io.StringReader
 
+
 class MainFragment : Fragment() {
 
     interface URICallback {
@@ -27,18 +28,12 @@ class MainFragment : Fragment() {
     lateinit var observer : MainLifecycleObserver
     lateinit var wfMgr: WifiManager
 
-    fun connectToWifi(ssid: String, key: String) {
-        if(!wfMgr.isWifiEnabled){
-            wfMgr.setWifiEnabled(true)
-        }
-        val conf = WifiConfiguration()
-        conf.SSID = "\"$ssid\""
-        conf.preSharedKey = "\"$key\""
-        Log.d("MainZ", "Attempting connection to ${ssid} using password ${key}")
-        var netid = wfMgr.addNetwork(conf)
-        wfMgr.disconnect()
-        wfMgr.enableNetwork(netid, true)
-        wfMgr.reconnect()
+    fun connectToWifi(ssid: String, key: String, security: String) {
+        val intent = Intent(requireActivity(), JoinWifi::class.java)
+        intent.putExtra("ssid",ssid)
+        intent.putExtra("password_type",security)
+        intent.putExtra("password",key)
+        startActivity(intent)
     }
 
     companion object {
@@ -75,7 +70,7 @@ class MainFragment : Fragment() {
                 Log.d("MainZ", "Got an file")
                 Log.d("MainZ", "Start connecting to wifi")
                 wifiList!!.forEach{
-                    connectToWifi(it.ssid, it.password)
+                    connectToWifi(it.ssid, it.password, it.security)
                 }
             }
         })
