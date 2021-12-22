@@ -102,6 +102,7 @@ public class JoinWifi extends AppCompatActivity implements CheckSSIDBroadcastRec
         String proxyBypass = getIntent().getStringExtra(PROXY_BYPASS);
         String proxyPacUri = getIntent().getStringExtra(PROXY_PAC_URI);
 
+        Log.d(TAG, "JoinWifi on "+mSSID+" password "+mPasswordType+" over "+mPassword);
         // Validate
         if ((mSSID == null) || // SSID REQUIRED
                 (mPasswordType != null && mPassword == null) || // PASSWORD REQUIRED IF PASSWORD TYPE GIVEN
